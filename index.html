@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎉 EXPLOSIVE BIRTHDAY PARTY 🎉</title>
+  <style>
+#filmWrapper {
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  z-index: 5;
+  background: rgba(0,0,0,0.2);
+}
+
+#filmStrip {
+  display: flex;
+  width: max-content;
+  animation: scrollFilm 25s linear infinite;
+}
+
+#filmStrip img:hover {
+  transform: rotate(4deg) scale(1.1);
+}
+
+#filmStrip img {
+  height: 140px;
+  margin: 0 10px;
+  border: 6px solid black;
+  box-shadow: 0 0 15px gold;
+  background: white;
+}
+
+#facesContainer {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 70%;
+  max-width: 700px;
+}
+
+.friendFace {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 5px solid hotpink;
+  box-shadow: 0 0 25px yellow;
+  transition: transform 0.3s;
+}
+
+.friendFace:hover {
+  transform: scale(1.15) rotate(3deg);
+}
+
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", cursive;
+      overflow: hidden;
+      text-align: center;
+      animation: rainbow 10s infinite linear;
+      color: white;
+      position: relative;
+      height: 100vh;
+    }
+
+    @keyframes rainbow {
+      0% { background: red; }
+      16% { background: orange; }
+      32% { background: yellow; color: black; }
+      48% { background: green; }
+      64% { background: blue; }
+      80% { background: indigo; }
+      100% { background: violet; }
+    }
+
+    h1 { font-size: 4rem; animation: bounce 1s infinite; cursor: pointer; }
+    @keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);} }
+
+    button { font-size:1.5rem; padding:15px 25px; background:hotpink; border:none; border-radius:20px; cursor:pointer; box-shadow:0 0 20px yellow; margin:20px; transition: transform 0.3s; }
+    button:hover { transform: scale(1.2) rotate(10deg); }
+
+    /* Unicorns */
+    .unicorn {
+      position: absolute;
+      font-size: 6rem;
+      animation: jump 1s infinite ease-in-out;
+    }
+    @keyframes jump {
+      0%,100% { transform: translateY(0); }
+      25% { transform: translateY(-120px) rotate(-20deg); }
+      50% { transform: translateY(0) rotate(20deg); }
+      75% { transform: translateY(-80px) rotate(-10deg); }
+    }
+
+    /* Hearts */
+    .heart {
+      position: absolute;
+      font-size: 3rem;
+      animation: float linear infinite;
+      opacity: 0.9;
+      cursor: pointer;
+      text-shadow: 1px 1px 4px pink;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity:1; }
+      100% { transform: translateY(-50px) rotate(360deg); opacity:0; }
+    }
+
+    /* Friend face */
+    #friendFace {
+      width: 200px;
+      border-radius:50%;
+      cursor:pointer;
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      border:5px solid hotpink;
+      box-shadow:0 0 25px yellow;
+    }
+
+    /* Paragraph popup */
+    #popup {
+      display: none; position: fixed; top:50%; left:50%; transform: translate(-50%,-50%);
+      background: rgba(255,255,255,0.95); color:#ff1493; padding:30px; border-radius:25px;
+      font-size:1.3rem; box-shadow:0 0 50px hotpink; max-width:600px; text-align:center; z-index:10000;
+    }
+    #popup button { margin-top:15px; background: hotpink; border-radius:15px; padding:10px 20px; box-shadow:0 0 15px yellow; border:none; cursor:pointer; }
+
+    /* Cake */
+    #cake { font-size:6rem; cursor:pointer; margin-top:30px; }
+
+    /* Film strip */
+    #filmStripContainer {
+      position:absolute; bottom:10%; left:0; width:100%; overflow:hidden; height:120px;
+    }
+    #filmStrip {
+      display:flex;
+      position:absolute; left:0; height:100px;
+    }
+    #filmStrip img {
+      height:100px;
+      margin-right:10px;
+      border:5px solid white;
+      border-radius:10px;
+      cursor:pointer;
+      box-shadow: 0 0 20px yellow;
+    }
+
+    /* "Ấn vào đây" */
+    #pressHere {
+      position: absolute;
+      top:5%;
+      left:50%;
+      transform: translateX(-50%);
+      font-size: 3rem;
+      color: yellow;
+      font-weight: bold;
+      text-shadow: 2px 2px 10px hotpink;
+      animation: bounceArrow 1s infinite;
+    }
+    @keyframes bounceArrow {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background music -->
+  <audio id="bgMusic" autoplay loop>
+  <source src="Khúc Hát Mừng Sinh Nhật Remix.mp3" type="audio/mpeg">
+</audio>
+
+  <!-- Press here -->
+  <div id="pressHere">Ấn vào đây ⬇️</div>
+
+  <!-- Multiple unicorns -->
+  <div id="unicornContainer"></div>
+
+  <h1 onclick="party()">🎂 HAPPY BIRTHDAY!!! 🎂</h1>
+
+  <!-- Friend face -->
+  <div id="facesContainer">
+  <img class="friendFace" src="hang1.jpg" onclick="openWish(0)">
+  <img class="friendFace" src="hang2.jpg" onclick="openWish(1)">
+  <img class="friendFace" src="hang3.jpg" onclick="openWish(2)">
+  <img class="friendFace" src="hang4.jpg" onclick="openWish(3)">
+  <img class="friendFace" src="hang5.jpg" onclick="openWish(4)">
+  <img class="friendFace" src="hang6.jpg" onclick="openWish(5)">
+  <img class="friendFace" src="hang7.jpg" onclick="openWish(6)">
+  <img class="friendFace" src="hang8.jpg" onclick="openWish(7)">
+</div>
+
+
+  <!-- Paragraph popup -->
+  <div id="popup">
+  <div id="wishText"></div>
+  <br>
+  <button onclick="closePopup()">Close 💕</button>
+</div>
+
+
+  <!-- Cake -->
+  <div id="cake" onclick="cakeConfetti()">🎂</div>
+
+  <!-- Film strip with 10 pictures -->
+  <div id="filmStripContainer">
+    <div id="filmStrip">
+      <img src="pic1.jpg" alt="">
+      <img src="pic2.jpg" alt="">
+      <img src="pic3.jpg" alt="">
+      <img src="pic4.jpg" alt="">
+      <img src="pic5.jpg" alt="">
+      <img src="pic6.jpg" alt="">
+      <img src="pic7.jpg" alt="">
+      <img src="pic8.jpg" alt="">
+      <img src="pic9.jpg" alt="">
+      <img src="pic10.jpg" alt="">
+    </div>
+  </div>
+
+  <script>
+const wishes = [
+  "💖 ế lô hằng yêu thế là lại thêm 1 tuổi lại là người già nhất động rui kkk. Chúc hpm tuồi mới nhiều hạnh phúc, nhiều sức khoẻ, nhiều may mắn, nhiều niềm vuii. Keep being urself và chinh chiến ở hà lan nhé i lov u and miss you sm 😍 Ước gì về vn mình lại chở nhau đi ăn phở xào nên đừng nghỉ chơi nhs tks.",
+  "🌈 a nhon hà sê yo hằng bếu ngu >< hẹ hẹ cl đẻ đầu trong nhóm mà yếu rớt ra sợ tht! chúc hằng 19 tuổi vẫn trẻ như 18 tuổi nhak. lun vui vẻ và mạnh khỏe thích g dc nấy cầu được ước thấy nhak hi!!! chúc u20 sống tốt ở hà lan đợi toi có visa châu âu tui bay qua chơi cùm nha @@ cú lên sắp dc về vnam ròi moa moa iu hèng.",
+  "🦄 dạ chúc đồng hằng 19 tuổi sớm dc về hnoi ăn phở xào và coi the flob. chúc ko còn yếu rớt mùng tơi yếu rơi nước mắt stay strong stay tuned và des mãi nghệ và có những con ảnh film để đời. chúc tuổi mới hay ăn chóng lớn. đồng động mãi yêu wtfwwtf.",
+  "✨ bel yêu ơi, sinh nhật vui vẻ💙 (tim xanh = hằng) hằng ơi m là ng chụp ảnh đẹp nhất des đẹp nhất giỏi nhất trong lòng t noone can say otherwise😠 hằng là standard của mọi thẩm mỹ trong t (trừ thịt kho tàu)☺️ hằng chờ ngày t có brand t thuê hằng nhé đảm bảo thù lao như ý nguyện! 19 yêu thương🥰.",
+  "🎂 Chào anh bạnn. Cuối cùng thì t vs m cũng hẹn nhau dc ở mỗi nơi khác, đúng như những gì m viết ở post ảnh kỷ yếu của t vs m. Thành người lớn nhất động r, mong tuổi 19 của m cũng sẽ nhiều niềm vui và cũng tích cực, kiếm dc nhiều job ngon và béo ị và mãi là anh bạn des đẹp nấu ăn ngon của btao ily. p/s: đợt này a đang ôn thi tróc vảy, hẹn chú sau thi anh bao chú cốc tsua nha mải iu.",
+  "💫 Chúc mừng sinh nhật bé hằng nha!!! Chúc đón sinh nhật bên trời âu thật trưởng thành dù a bt chú cũng lớn lắm r. Chúc bé tuổi 19 học hành khấm khá luôn khoẻ mạnh và nấu dc nhiều món hơn mdu t ko hay khen nma t xem locket đều lắm và t thấy rất inspired. Năm sau ra ngoài sẽ bắt chước! Yêu lắm nha con rắn❤️‍🔥💙.",
+  "🌸 Chúc mừng sinh nhật bé iu!!! 🎉 Tuổi mới nhiều sức khoẻ, nhiều niềm vui và thật nhiều may mắn nhaaa 🍀. Mấy khi gặp nhau đâu, toàn nhắn tin không à 😂, nhưng mà t vẫn nhớ Hằng là người siêu cute và siêu giỏi 🥰. Mong Hằng ở Hà Lan học hành ngon nghẻ, ăn uống đầy đủ và đừng quên t nhé 🥺.",
+  "💌 hằng thúi chúc mừng sinh nhậc. mong bạn sẻ thích concept design lần này. chúm mình đã kết hợp giữa style châu âu kỉ phấn trắng cùng với một chút minimalism và cả indie rất hợp thời, mong hằng sớm lấy được tấm chồng và sống lâu trăm tuổi, nhất định sau này kết hôn với huynjin mình sẽ nhờ bạn làm media còn huynjin không chịu lấy mình thì mình cưới bạch kính đình vẫn sẽ mời bạn làm media yên tâm nhé, so much love from elsa canada."
+];
+
+  function openWish(index) {
+  document.getElementById("wishText").innerText = wishes[index];
+  document.getElementById("popup").style.display = "block";
+}
+
+    // Multiple unicorns
+    const unicornContainer = document.getElementById('unicornContainer');
+    const unicorns = [];
+    for(let i=0;i<6;i++){ // 6 unicorns for max chaos
+      let u = document.createElement('div');
+      u.className='unicorn';
+      u.innerText='🦄';
+      u.style.top=(50+Math.random()*35)+'%';
+      unicornContainer.appendChild(u);
+      unicorns.push({el:u,x:-100-Math.random()*500,speed:2+Math.random()*3});
+    }
+    function moveUnicorns(){
+      unicorns.forEach(u=>{
+        u.x+=u.speed;
+        if(u.x>window.innerWidth+150) u.x=-150-Math.random()*500;
+        u.el.style.left=u.x+'px';
+      });
+      requestAnimationFrame(moveUnicorns);
+    }
+    moveUnicorns();
+
+    // Hearts
+    function createHeart(){
+      let h = document.createElement('div');
+      h.className='heart';
+      h.innerText='💖';
+      h.style.left=Math.random()*window.innerWidth+'px';
+      h.style.fontSize=(Math.random()*3+2)+'rem';
+      h.style.animationDuration=(Math.random()*3+3)+'s';
+      h.addEventListener('click', ()=>{ h.remove(); new Audio("https://www.myinstants.com/media/sounds/bell-ring-01.mp3").play(); });
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),6000);
+    }
+    setInterval(createHeart,100); // lots of hearts
+
+    // Cake confetti
+    function cakeConfetti(){
+      for(let i=0;i<80;i++){
+        let c = document.createElement("div");
+        c.className="confetti";
+        c.innerText="✨🎊💖";
+        c.style.left=Math.random()*window.innerWidth+"px";
+        c.style.fontSize=(Math.random()*3+1)+"rem";
+        c.style.animationDuration=(Math.random()*2+2)+"s";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+      }
+      new Audio("https://www.myinstants.com/media/sounds/bell-ring-01.mp3").play();
+    }
+
+    // Header emojis chaos
+    function party(){
+      for(let i=0;i<50;i++){
+        let emoji = document.createElement("div");
+        emoji.className="confetti";
+        emoji.innerText="🎉🎈🤡🦄🌈🍰💖"[Math.floor(Math.random()*8)];
+        emoji.style.left=Math.random()*window.innerWidth+"px";
+        emoji.style.animationDuration=(Math.random()*2+2)+"s";
+        document.body.appendChild(emoji);
+        setTimeout(()=>emoji.remove(),4000);
+      }
+      new Audio("https://www.myinstants.com/media/sounds/windows-xp-error.mp3").play();
+    }
+
+    // Friend face click → paragraph
+    document.getElementById('friendFace').addEventListener('click',()=>{
+      document.getElementById('popup').style.display='block';
+    });
+    function closePopup(){ document.getElementById('popup').style.display='none'; }
+
+    // Film strip animation
+    const filmStrip = document.getElementById('filmStrip');
+    let stripX = 0;
+    function moveFilmStrip(){
+      stripX -= 3; // scroll speed
+      if(stripX <= -filmStrip.scrollWidth/2) stripX = 0;
+      filmStrip.style.transform = `translateX(${stripX}px)`;
+      requestAnimationFrame(moveFilmStrip);
+    }
+    moveFilmStrip();
+  </script>
+</body>
+</html>
